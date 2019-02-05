@@ -10,10 +10,11 @@ FormatColor:
              For hexadecimal numbers, the 0x prefix must be present.
          
              For decimal numbers, a space ore a comma must be preset
-             between the 3 color values.
+             between color 1-2 and  2-3.
     
      bgr    Swaps rgb colours to bgr for hexadecimal numbers.
             This parameter is optional.
+            Set to one to swap the colors.
     
 By Megnatar
 
