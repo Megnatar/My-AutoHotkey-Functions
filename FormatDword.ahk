@@ -23,8 +23,6 @@ MakeLong( LoWord, HiWord, H := 0 ) {
         return ( ( HiWord << BITS ) | ( LoWord & WORD ) )
     Else 
         return Format( "{1:#x}",  ( ( HiWord << BITS ) | ( LoWord & WORD ) ) )
-    
-    ;return Format("{1:#x}", (LoWord | (HiWord << BITS)))
 }
 
 /* **** Test ****
