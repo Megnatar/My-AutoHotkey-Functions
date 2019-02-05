@@ -26,3 +26,11 @@ MakeLong( LoWord, HiWord, H := 0 ) {
     
     ;return Format("{1:#x}", (LoWord | (HiWord << BITS)))
 }
+
+/* **** Test ****
+
+Dword := 0x29A1A0A
+MsgBox   % "`n"
+.                   "" GetHighWord(Dword)  " - " GetHighWord(Dword, 1) "`n"
+.                   "" GetLowWord(Dword)  " - " GetLowWord(Dword, 1) "`n"
+.                   "" MakeLong(GetLowWord(Dword), GetHighWord(Dword))   " - " MakeLong(GetLowWord(Dword), GetHighWord(Dword) , 1)  " `n "
