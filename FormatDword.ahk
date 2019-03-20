@@ -25,13 +25,14 @@ MsgBox % "Integer`t`t`tHexadecimal`n"
 
 /*
 This table might help to make some sense from all of this.
-1___________8____________16___________24__________32
-1 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 1 0 0 0 0 0 1 0 0 0 = 32 bits.
-31___8bit____|_____8bit____|_____8bit___|____8bit__0 -> Bit 0 - 31
------msb--------+---next_msb---|----next_lsb--+----lsb------- Most and Least Significant Bit
------BYTE4-----+---BYTE3-------+----BYTE2-----+----BYTE1--- = 4 Byte / 4x8 bit.
-------------HIGHWORD-----------|------------LOWWORD-------- = 2 Word.
----------------------------------DWORD----------------------------- = 1 Dword = 2 Word = 4 Byte = 32 bit.
+This table might help to make some sense from all of this.
+ 1_____________8______________16_______________24______________32 
+ 1 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 1 0 0 0 0 0 1 0 0 0 = 32 bits.
+ 31____8bit____|_____8bit______|_____8bit______|_____8bit______0 -> Bit 0-31.
+---- msb ----- + -- next_msb - | -- next_lsb - + -- lsb -------- Most and Least Significant Bit.
+---- BYTE4 --- + -- BYTE3 ---- + -- BYTE2 ---- + -- BYTE1 ------ = 4 Byte / 4x8 bit.
+---------- HIGHWORD ---------- | -------- LOWWORD -------------- = 2 Word.
+---------------------------- DWORD ----------------------------- = 1 Dword = 2 Word = 4 Byte = 32 bit.
 
 These functions do exactly the same as the macros found on the MSDN links below.
 They can be used with OnMessage() to format something like coordinates from LParam.
