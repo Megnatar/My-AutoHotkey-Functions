@@ -25,7 +25,6 @@ MsgBox % "Integer`t`t`tHexadecimal`n"
 
 /*
 This table might help to make some sense from all of this.
-This table might help to make some sense from all of this.
  1_____________8______________16_______________24______________32 
  1 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 1 0 0 0 0 0 1 0 0 0 = 32 bits.
  31____8bit____|_____8bit______|_____8bit______|_____8bit______0 -> Bit 0-31.
