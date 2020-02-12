@@ -26,7 +26,7 @@
         *~w::
         KeyW := KeyW ? keywait(KeyW) : keywait()        ; Wait for key release and store the key in a variable when var KeyW is empty.
         if (keywait(KeyW, "D T0.3", 1) = 0)             ; Wait 300ms for the key be pushed down again and let the function return ErrorLevel
-            Send {z down}{z up}                         ; Do something when KeyWait() returns zero on the line above.
+            Send {z down}{z up}                         ; Do something when keyWait() returns zero on the line above. The key was pressed twice.
         return
 
     Tip.
