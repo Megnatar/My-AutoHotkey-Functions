@@ -1,13 +1,13 @@
 /*
-    PARAMETERS
-    K:           The hotkey that called the function or the key to wait for.
-                    When empty, the content of A_ThisHotkey is used as the key to wait for
+     Keywait function. It can be used in a couple of way's.
+       Parameters
+       K:      This is the key to wait for. Input can be blanck, A_ThisHotkey will then be used. Or any other quoted key.
+               All modifiers will be removed from the string if any occour. More mods and slower: [\$\*\^\+~#!&<>]
+    
+       O:      Here you should specifie options for the KeyWait command. Like L, D and T. Input should be quoted! "L D T0.5"
+    
+       E:      When set to 1, the function will return ErrorLevel instead of the key it waited for.
 
-    O:        Use D for a down key state, L for logical state and T for time to wait. Which is in seconds.
-                    Errorlevel is set to 1 when the timer runs out.
-
-    ErrLvL:     Returns Errorlevel if set to 1. By default the function returns the key used by the first parameter.
-                    All modifiers will be removed from the key when A_ThisHotkey is used.
 
     EXAMPLE
     Press the W key twice to send Z.
@@ -33,8 +33,11 @@
      Store you're hotkey/key in a variable to avoid using regex all the time. Doing so will make the function about 10ms faster.
 */
 
+;   TODO:
+;     To speed up the function. Add a option to filterout commonly used modifiers from the value in A_Thishotkey.
+
 KeyWait(K := "", O := "", ErrLvL := "") {
-    keywait, % Key := K ? K : RegExReplace(A_ThisHotkey, "[\$\*\^\+~#!&<>]"), % O
+    keywait, % Key := K ? K : RegExReplace(A_ThisHotkey, "[~#\*\$\^\+!&<>]"), % O
     Return ErrLvL = 1 ? ErrorLevel : Key
 }
 
