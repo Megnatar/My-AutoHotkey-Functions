@@ -1,12 +1,12 @@
 /*
     PARAMETERS
-    hKey:           The hotkey that called the function or the key to wait for.
+    K:           The hotkey that called the function or the key to wait for.
                     When empty, the content of A_ThisHotkey is used as the key to wait for
 
-    Options:        Use D for a down key state, L for logical state and T for time to wait. Which is in seconds.
+    O:        Use D for a down key state, L for logical state and T for time to wait. Which is in seconds.
                     Errorlevel is set to 1 when the timer runs out.
 
-    RtrnErrLvL:     Returns Errorlevel if set to 1. By default the function returns the key used by the first parameter.
+    ErrLvL:     Returns Errorlevel if set to 1. By default the function returns the key used by the first parameter.
                     All modifiers will be removed from the key when A_ThisHotkey is used.
 
     EXAMPLE
@@ -33,6 +33,12 @@
      Store you're hotkey/key in a variable to avoid using regex all the time. Doing so will make the function about 10ms faster.
 */
 
+KeyWait(K := "", O := "", ErrLvL := "") {
+    keywait, % Key := K ? K : RegExReplace(A_ThisHotkey, "[\$\*\^\+~#!&<>]"), % O
+    Return ErrLvL = 1 ? ErrorLevel : Key
+}
+
+/* Older version
 KeyWait(hKey := "", Options := "", RtrnErrLvL := "") {
     keywait, % Key := hKey ? hKey : RegExReplace(A_ThisHotkey, "[\$\*\^\+~#!&<>]"), % Options
     Return RtrnErrLvL = 1 ? ErrorLevel : Key
