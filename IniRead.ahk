@@ -7,7 +7,7 @@
     Parameters info.
     InputFile:          Should the name or path to the ini file to get the variables from.
     LoadSection:        When empty, all variables from the file will be loaded. Otherwise LoadSection can be
-                        a single section name or a couple of section names, each devided by a space.
+                        a single section name or a couple of section names, each divided by a space.
                         LoadSection can also be a object holding the names to load.
                         
                         String:     "Section"
