@@ -1,6 +1,6 @@
 /*
     IniRead.ahk v1.0
-    Well I've started this to reduce the nr of lines in my scripts. However I ended up with a function 74 lines long.
+    Well I've started this to reduce the nr of lines in my scripts. However I ended up with a function 71 lines long.
     So much for my reasoning, however this is mostly because iniRead() can be used in a flexible way. It can load
     all, one or a couple sections the order does not matter. Line comments and empty lines are ignored.
         
@@ -41,9 +41,7 @@ iniRead(InputFile, LoadSection = 0) {
             if ((InStr(LoadSection, " ")) > 1) {
                 Sections := []
                 Loop, Parse, LoadSection, " ", A_Space
-                {
                     Sections[A_Index] := A_Loopfield
-                }
                 for i, Name in Sections
                 {
                     Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
@@ -54,7 +52,7 @@ iniRead(InputFile, LoadSection = 0) {
                         }
                         if (SectionName){
                             if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
-                                if ((InStr(A_LoopField, "`;")) | (!A_LoopField))
+                                if (((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField))
                                     Continue
                                 else
                                     break
@@ -71,9 +69,8 @@ iniRead(InputFile, LoadSection = 0) {
                         Continue
                     }
                     If (SectionName) {
-                        if ((InStr(A_LoopField, "[",, 1, 1)) = 1) {
+                        if ((InStr(A_LoopField, "[",, 1, 1)) = 1)
                             Break
-                        }
                         VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)        
                     }
                 }
