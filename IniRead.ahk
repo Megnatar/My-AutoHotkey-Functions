@@ -23,7 +23,7 @@
 
 iniRead(InputFile, LoadSection = 0) {
     if (LoadSection) {
-        if (IsObject(LoadSection)) {                                            ; Load multiple sections from object
+        if (IsObject(LoadSection)) {                                            ; Load multiple sections using a object
              for i, Name in LoadSection
              {
                 Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
@@ -46,7 +46,7 @@ iniRead(InputFile, LoadSection = 0) {
                 }
             }
         } else if (!IsObject(LoadSection)) {
-            if ((InStr(LoadSection, " ")) > 1) {                                ; Load multiple sections
+            if ((InStr(LoadSection, " ")) > 1) {                                ; Load multiple sections using strings
                 Sections := []
                 Loop, Parse, LoadSection, " ", A_Space
                     Sections[A_Index] := A_Loopfield
