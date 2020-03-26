@@ -1,5 +1,5 @@
 /*
-    Well I've started this to reduce the nr of lines in my scripts. However I ended up with a function 71 lines long.
+    Well I've started this to reduce the nr of lines in my scripts. However I ended up with a function 75 lines long.
     So much for my reasoning, however this is mostly because iniRead() can be used in a flexible way. It can load
     all, one or a couple sections. The order in which there stored does not matter. Empty and commented lines are ignored.
     
