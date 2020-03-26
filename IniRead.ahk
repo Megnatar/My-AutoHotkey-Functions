@@ -1,20 +1,26 @@
 /*
-    IniRead.ahk v1.0
     Well I've started this to reduce the nr of lines in my scripts. However I ended up with a function 71 lines long.
     So much for my reasoning, however this is mostly because iniRead() can be used in a flexible way. It can load
-    all, one or a couple sections the order does not matter. Line comments and empty lines are ignored.
-        
+    all, one or a couple sections. The order in which there stored does not matter. Empty and commented lines are ignored.
+    
+    If you wonder how? Because variables are local to functions, the exaption is.
+    Referenced variables are not local to functions. So %VarRef% represents global variables in which some value is stored 
+    
+    %VarRef% := "ValueOfVar"        
+    
     Parameters info.
-    InputFile:          Should the name or path to the ini file to get the variables from.
+    InputFile:          Should be the name or path to the ini file to get the variables from.
     LoadSection:        When empty, all variables from the file will be loaded. Otherwise LoadSection can be
-                        a single section name or a couple of section names, each divided by a space.
+                        a single sectionname or a couple of sectionnames, each devided by a space.
                         LoadSection can also be a object holding the names to load.
                         
                         String:     "Section"
                         Strings:    "Section3 Section2 Section5"
                         Object:     ["Section3", "Section2", "Section5"]
-    By Megnatar.    
+    
+    By Megnatar.
 */
+
 iniRead(InputFile, LoadSection = 0) {
     if (LoadSection) {
         if (IsObject(LoadSection)) {
