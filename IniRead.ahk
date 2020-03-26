@@ -1,5 +1,4 @@
-
-iniRead(InputFile, LoadSection := "") {
+iniRead(InputFile, LoadSection = 0) {
     if (LoadSection) {
         if (IsObject(LoadSection)) {
              for i, Name in LoadSection
@@ -10,22 +9,24 @@ iniRead(InputFile, LoadSection := "") {
                         SectionName := StrReplace(A_Loopfield, "["), SectionName := StrReplace(SectionName, "]")
                         Continue
                     }
-                    if (SectionName){
-                        if (((InStr(A_Loopfield, "[",,,1)) & (!InStr(A_Loopfield, "[",,2))) | (InStr(A_LoopField, "`;")) | (!A_LoopField)) {
-                            SectionName := ""
-                            break
+                    if (SectionName) {
+                        if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
+                            if (((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField))
+                                Continue
+                            else
+                                break
                         }
                         VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)
                     }
                 }
             }
         } else if (!IsObject(LoadSection)) {
-            if (InStr(LoadSection, " ",,,2)) {
+            if ((InStr(LoadSection, " ")) > 1) {
+                Sections := []
                 Loop, Parse, LoadSection, " ", A_Space
                 {
                     Sections[A_Index] := A_Loopfield
-                 }
-                 
+                }
                 for i, Name in Sections
                 {
                     Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
@@ -35,9 +36,11 @@ iniRead(InputFile, LoadSection := "") {
                             Continue
                         }
                         if (SectionName){
-                            if (((InStr(A_Loopfield, "[",,,1)) & (!InStr(A_Loopfield, "[",,2))) | (InStr(A_LoopField, "`;")) | (!A_LoopField)) {
-                                SectionName := ""
-                                break
+                            if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
+                                if ((InStr(A_LoopField, "`;")) | (!A_LoopField))
+                                    Continue
+                                else
+                                    break
                             }
                             VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)
                         }
@@ -51,7 +54,7 @@ iniRead(InputFile, LoadSection := "") {
                         Continue
                     }
                     If (SectionName) {
-                        if ((InStr(A_Loopfield, "[",,,1)) & (!InStr(A_Loopfield, "[",,2))) {
+                        if ((InStr(A_LoopField, "[",, 1, 1)) = 1) {
                             Break
                         }
                         VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)        
@@ -62,7 +65,7 @@ iniRead(InputFile, LoadSection := "") {
     } else if (!LoadSection) {
         Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
         {
-            if (((InStr(A_Loopfield, "[",,,1)) & (!InStr(A_Loopfield, "[",,2))) | (InStr(A_LoopField, "`;")) | (!A_LoopField))
+            if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField))
                 Continue
             VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)
         }
