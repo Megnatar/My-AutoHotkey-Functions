@@ -23,7 +23,7 @@
 
 iniRead(InputFile, LoadSection = 0) {
     if (LoadSection) {
-        if (IsObject(LoadSection)) {
+        if (IsObject(LoadSection)) {                                            ; Load multiple sections from object
              for i, Name in LoadSection
              {
                 Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
@@ -34,17 +34,19 @@ iniRead(InputFile, LoadSection = 0) {
                     }
                     if (SectionName) {
                         if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
-                            if (((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField))
+                            if (((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
                                 Continue
-                            else
+                            } else {
+                                SectionName := ""
                                 break
+                            }
                         }
                         VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)
                     }
                 }
             }
         } else if (!IsObject(LoadSection)) {
-            if ((InStr(LoadSection, " ")) > 1) {
+            if ((InStr(LoadSection, " ")) > 1) {                                ; Load multiple sections
                 Sections := []
                 Loop, Parse, LoadSection, " ", A_Space
                     Sections[A_Index] := A_Loopfield
@@ -56,18 +58,20 @@ iniRead(InputFile, LoadSection = 0) {
                             SectionName := StrReplace(A_Loopfield, "["), SectionName := StrReplace(SectionName, "]")
                             Continue
                         }
-                        if (SectionName){
+                        if (SectionName) {
                             if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
-                                if (((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField))
+                                if (((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField)) {
                                     Continue
-                                else
+                                } else {
+                                    SectionName := ""
                                     break
+                                }
                             }
                             VarRef := SubStr(A_LoopField, 1, InStr(A_LoopField, "=")-1), %VarRef% := SubStr(A_LoopField, InStr(A_LoopField, "=")+1)
                         }
                     }
                 }
-            } Else {
+            } Else {                                                        ; Load single section
                 Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
                 {
                     if (InStr(A_Loopfield, LoadSection)) {
@@ -82,7 +86,7 @@ iniRead(InputFile, LoadSection = 0) {
                 }
             }
         }
-    } else if (!LoadSection) {
+    } else if (!LoadSection) {                                              ; Load all variables from ini
         Loop, parse, % FileOpen(InputFile, 0).read(), `n, `r
         {
             if (((InStr(A_LoopField, "[",, 1, 1)) = 1) | ((InStr(A_LoopField, "`;",, 1, 1)) = 1) | (!A_LoopField))
